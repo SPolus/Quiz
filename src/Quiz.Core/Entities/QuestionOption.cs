@@ -8,6 +8,6 @@
         public int OptionId { get; set; }
         public Option Option { get; set; }
 
-        public bool Correct { get; set; }
+        public bool IsCorrect { get; set; }
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Quiz.Infrastructure.Data
 {
-    public class QuizRepository : EfRepository<Question>, IQuizRepository
+    public class QuestionRepository : EfRepository<Question>, IQuestionRepository
     {
         private readonly QuizDbContext _context;
 
-        public QuizRepository(QuizDbContext context) : base(context)
+        public QuestionRepository(QuizDbContext context) : base(context)
         {
             _context = context;
         }
