@@ -13,15 +13,15 @@ namespace Quiz.Infrastructure.Data.Configuration
         {
             builder.HasKey(qo => new { qo.QuestionId, qo.OptionId });
 
-            builder.HasOne(q => q.Question)
-                .WithMany(qo => qo.QuestionOptions)
-                .HasForeignKey(fk => fk.QuestionId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasOne(q => q.Question)
+            //    .WithMany(qo => qo.QuestionOptions)
+            //    .HasForeignKey(fk => fk.QuestionId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(o => o.Option)
-                .WithMany(qo => qo.QuestionOptions)
-                .HasForeignKey(fk => fk.OptionId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasOne(o => o.Option)
+            //    .WithMany(qo => qo.QuestionOptions)
+            //    .HasForeignKey(fk => fk.OptionId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(p => p.IsCorrect)
                 .IsRequired();

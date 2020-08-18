@@ -21,6 +21,8 @@ namespace Quiz.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<QuestionOption>().HasKey(qo => new { qo.QuestionId, qo.OptionId });
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
