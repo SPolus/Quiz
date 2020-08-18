@@ -11,8 +11,6 @@ namespace Quiz.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.HasKey(c => c.Id);
-
             builder.Property(p => p.Name)
                 .HasMaxLength(50)
                 .IsRequired();

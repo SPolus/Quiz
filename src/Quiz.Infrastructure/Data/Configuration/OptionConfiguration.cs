@@ -11,8 +11,6 @@ namespace Quiz.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Option> builder)
         {
-            builder.HasKey(k => k.Id);
-
             builder.Property(p => p.Content)
                 .IsRequired();
         }

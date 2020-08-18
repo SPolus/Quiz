@@ -11,18 +11,14 @@ namespace Quiz.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Question> builder)
         {
-            builder.HasKey(k => k.Id);
-
             builder.Property(p => p.Content)
                 .IsRequired();
 
-            builder.Property(p => p.Category)
-                .IsRequired();
-
-            builder.HasOne(q => q.Category)
-                .WithMany(c => c.Questions)
-                .HasForeignKey(q => q.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(q => q.Category)
+            //    .WithMany(c => c.Questions)
+            //    .IsRequired()
+            //    .HasForeignKey(q => q.CategoryId)
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
