@@ -1,4 +1,4 @@
-﻿@model Quiz.Core.Entities.Question
+﻿@model Quiz.Application.Models.QuestionDto
 
 @{
     ViewData["Title"] = "Details";
@@ -20,7 +20,7 @@
             @Html.DisplayNameFor(model => model.Category)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.Category)
         </dd>
     </dl>
 </div>

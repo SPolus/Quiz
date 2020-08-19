@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Quiz.Infrastructure.Data;
 using Quiz.Infrastructure.Identity;
 using Quiz.Domain.Interfaces;
+using AutoMapper;
 
 namespace Quiz.Web
 {
@@ -44,6 +45,8 @@ namespace Quiz.Web
             //    .AddDefaultTokenProviders();
 
             services.AddScoped<IQuestionRepository, QuestionRepository>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             {
