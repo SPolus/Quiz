@@ -1,4 +1,4 @@
-﻿namespace Quiz.Core.Entities
+﻿namespace Quiz.Domain.Entities
 {
     public abstract class EntityBase
     {

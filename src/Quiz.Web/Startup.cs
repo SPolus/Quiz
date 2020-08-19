@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Quiz.Infrastructure.Data;
 using Quiz.Infrastructure.Identity;
+using Quiz.Domain.Interfaces;
 
 namespace Quiz.Web
 {
@@ -37,18 +38,22 @@ namespace Quiz.Web
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
-                       
 
             //services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<AppIdentityDbContext>();
             //    .AddDefaultTokenProviders();
 
-            services.AddControllersWithViews();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             services.AddRazorPages();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

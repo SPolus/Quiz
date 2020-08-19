@@ -1,8 +1,8 @@
-﻿using Quiz.Core.Entities;
+﻿using Quiz.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Quiz.Core.Interfaces
+namespace Quiz.Domain.Interfaces
 {
     public interface IAsyncRepository<T> where T : EntityBase
     {
