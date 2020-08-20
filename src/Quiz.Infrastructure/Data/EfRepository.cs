@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Quiz.Core.Entities;
-using Quiz.Core.Interfaces;
+using Quiz.Domain.Entities;
+using Quiz.Domain.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

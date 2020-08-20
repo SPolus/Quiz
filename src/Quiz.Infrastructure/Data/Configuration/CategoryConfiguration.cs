@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Quiz.Core.Entities;
+using Quiz.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

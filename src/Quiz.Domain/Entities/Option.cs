@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Quiz.Core.Entities
+namespace Quiz.Domain.Entities
 {
     public class Option : EntityBase
     {

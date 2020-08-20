@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Quiz.Core.Entities;
-using Quiz.Core.Interfaces;
+using Quiz.Domain.Entities;
+using Quiz.Domain.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,6 +20,7 @@ namespace Quiz.Infrastructure.Data
             if (includeOptions)
             {
                 return await _context.Questions
+                    .Include(c => c.Category)
                     .Include(qo => qo.QuestionOptions)
                     .ThenInclude(o => o.Option)
                     .FirstOrDefaultAsync(q => q.Id == id);
@@ -33,12 +34,23 @@ namespace Quiz.Infrastructure.Data
             if (includeOptions)
             {
                 return await _context.Questions
+                    .Include(c => c.Category)
                     .Include(qo => qo.QuestionOptions)
-                    //.ThenInclude(o => o.Option)
+                    .ThenInclude(o => o.Option)
                     .ToListAsync();
             }
 
             return await base.GetAllAsync();
+        }
+
+        public async Task<IReadOnlyCollection<Category>> GetAllCategories()
+        {
+            return await _context.Categories.ToListAsync();
+        }
+
+        public async Task<IReadOnlyCollection<Option>> GetAllOptions()
+        {
+            return await _context.Options.ToListAsync();
         }
     }
 }
