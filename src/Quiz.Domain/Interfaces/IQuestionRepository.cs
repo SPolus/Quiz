@@ -8,5 +8,7 @@ namespace Quiz.Domain.Interfaces
     {
         Task<Question> GetByIdAsync(int id, bool includeOptions = true);
         Task<IReadOnlyCollection<Question>> GetAllAsync(bool includeOptions = true);
+        Task<IReadOnlyCollection<Category>> GetAllCategories();
+        Task<IReadOnlyCollection<Option>> GetAllOptions();
     }
 }

@@ -10,9 +10,10 @@
 <div class="text-center">
     @if (SignInManager.IsSignedIn(User))
     {
-        <a asp-controller="Home" asp-action="Privacy">
-            <input type="button" value="Start Test" class="btn btn-primary"/>
-        </a>
+        <a asp-controller="Questions" asp-action="Index" class="btn btn-primary">Start Test</a>
+        //<a asp-controller="Questions" asp-action="Index">
+          //  <input type="button" value="Start Test" class="btn btn-primary"/>
+        //</a>
     }
     else
     {

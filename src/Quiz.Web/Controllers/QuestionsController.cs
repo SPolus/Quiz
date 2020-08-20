@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using Quiz.Infrastructure.Data;
 
 namespace Quiz.Web.Controllers
 {
+    [Authorize]
     public class QuestionsController : Controller
     {
         private readonly IQuestionRepository _repository;
@@ -34,7 +36,7 @@ namespace Quiz.Web.Controllers
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var question = await _repository.GetByIdAsync(id);
+            var question = await _repository.GetByIdAsync(id, includeOptions: true);
 
             if (question == null)
             {
@@ -44,29 +46,35 @@ namespace Quiz.Web.Controllers
             return View(_mapper.Map<Question, QuestionDto>(question));
         }
 
-        //// GET: Questions/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-        //    return View();
-        //}
+        // GET: Questions/Create
+        public async Task<IActionResult> Create()
+        {
+            var categories = await _repository.GetAllCategories();
+            var options = await _repository.GetAllOptions();
 
-        //// POST: Questions/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Content,CategoryId,Id")] Question question)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(question);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", question.CategoryId);
-        //    return View(question);
-        //}
+            ViewData["CategoryId"] = new SelectList(categories, "Id", "Name");
+            return View();
+        }
+
+        // POST: Questions/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Content,CategoryId,Id")] Question question)
+        {
+            if (ModelState.IsValid)
+            {
+                await _repository.AddAsync(question);
+                
+                return RedirectToAction(nameof(Index));
+            }
+
+            var categories = await _repository.GetAllCategories();
+
+            ViewData["CategoryId"] = new SelectList(categories, "Id", "Name", question.CategoryId);
+            return View(question);
+        }
 
         //// GET: Questions/Edit/5
         //public async Task<IActionResult> Edit(int? id)

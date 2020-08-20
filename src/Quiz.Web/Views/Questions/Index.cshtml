@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Quiz.Application.Models.QuestionDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Questions";
 }
 
-<h1>Index</h1>
+<h1>Questions</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -18,11 +18,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Category)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Options)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Content)
@@ -31,11 +35,18 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
+                @foreach (var option in item.Options)
+                {
+                    @Html.DisplayFor(modelItem => option)
+                    <br />
+                }
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

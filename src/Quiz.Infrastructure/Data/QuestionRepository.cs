@@ -36,11 +36,21 @@ namespace Quiz.Infrastructure.Data
                 return await _context.Questions
                     .Include(c => c.Category)
                     .Include(qo => qo.QuestionOptions)
-                    //.ThenInclude(o => o.Option)
+                    .ThenInclude(o => o.Option)
                     .ToListAsync();
             }
 
             return await base.GetAllAsync();
+        }
+
+        public async Task<IReadOnlyCollection<Category>> GetAllCategories()
+        {
+            return await _context.Categories.ToListAsync();
+        }
+
+        public async Task<IReadOnlyCollection<Option>> GetAllOptions()
+        {
+            return await _context.Options.ToListAsync();
         }
     }
 }
